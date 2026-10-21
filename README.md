@@ -39,13 +39,15 @@ Example response from gpu_stats:
 
 ## How it works
 
-Queries NVML (pynvml) directly when available. Falls back to nvidia-smi subprocess if NVML is not accessible. Returns clean JSON in both cases.
+Queries NVML (pynvml) directly when available. Falls back to nvidia-smi subprocess if NVML is not accessible. Returns clean JSON in both cases. The nvidia-smi query does not include the CUDA version, so `cuda` is `null` on that path.
 
 ## Install
 
     pip install gpu-server
 
 The package moved from `mcp-gpu-server` to `gpu-server` on PyPI in 0.2.1. The old name is frozen at 0.1.3, which does not start with mcp 2.x. The command is still `mcp-gpu-server`.
+
+Listed on the official [MCP Registry](https://registry.modelcontextprotocol.io) as `io.github.moezdil/mcp-gpu-server`.
 
 ## Connect to your MCP client
 
@@ -55,6 +57,17 @@ Add this to your MCP client config file:
       "mcpServers": {
         "gpu": {
           "command": "mcp-gpu-server"
+        }
+      }
+    }
+
+Or without installing anything, using [uv](https://docs.astral.sh/uv/):
+
+    {
+      "mcpServers": {
+        "gpu": {
+          "command": "uvx",
+          "args": ["--from", "gpu-server", "mcp-gpu-server"]
         }
       }
     }
