@@ -45,7 +45,7 @@ Queries NVML (pynvml) directly when available. Falls back to nvidia-smi subproce
 
     pip install gpu-server
 
-The package moved from `mcp-gpu-server` to `gpu-server` on PyPI in 0.2.1. The old name is frozen at 0.1.3, which does not start with mcp 2.x. The command is still `mcp-gpu-server`.
+The package moved from `mcp-gpu-server` to `gpu-server` on PyPI in 0.2.1. The old name is frozen at 0.1.3, which does not start with mcp 2.x. The `mcp-gpu-server` command still works, and since 0.2.2 `gpu-server` does too.
 
 Listed on the official [MCP Registry](https://registry.modelcontextprotocol.io) as `io.github.moezdil/mcp-gpu-server`.
 
@@ -67,7 +67,7 @@ Or without installing anything, using [uv](https://docs.astral.sh/uv/):
       "mcpServers": {
         "gpu": {
           "command": "uvx",
-          "args": ["--from", "gpu-server", "mcp-gpu-server"]
+          "args": ["gpu-server"]
         }
       }
     }

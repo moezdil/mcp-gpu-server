@@ -72,3 +72,11 @@ def test_stdio_entrypoint_starts():
     )
     assert r.returncode == 0, r.stderr
     assert r.stdout == ""
+
+
+def test_console_scripts():
+    # uvx gpu-server runs the script named like the package
+    from importlib.metadata import entry_points
+
+    scripts = {e.name: e.value for e in entry_points(group="console_scripts")}
+    assert scripts["gpu-server"] == scripts["mcp-gpu-server"] == "mcp_gpu_server.server:main"
