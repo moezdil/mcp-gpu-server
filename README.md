@@ -2,7 +2,7 @@ mcp-name: io.github.moezdil/mcp-gpu-server
 
 # mcp-gpu-server
 
-[![PyPI](https://img.shields.io/pypi/v/mcp-gpu-server)](https://pypi.org/project/mcp-gpu-server/)
+[![PyPI](https://img.shields.io/pypi/v/gpu-server)](https://pypi.org/project/gpu-server/)
 
 An MCP server that exposes NVIDIA GPU metrics as tools. Once connected, any MCP-compatible client can query your GPU status in real time directly from a conversation.
 
@@ -43,7 +43,9 @@ Queries NVML (pynvml) directly when available. Falls back to nvidia-smi subproce
 
 ## Install
 
-    pip install mcp-gpu-server
+    pip install gpu-server
+
+The package moved from `mcp-gpu-server` to `gpu-server` on PyPI in 0.2.1. The old name is frozen at 0.1.3, which does not start with mcp 2.x. The command is still `mcp-gpu-server`.
 
 ## Connect to your MCP client
 

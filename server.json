@@ -7,13 +7,13 @@
     "url": "https://github.com/moezdil/mcp-gpu-server",
     "source": "github"
   },
-  "version": "0.2.0",
+  "version": "0.2.1",
   "websiteUrl": "https://github.com/moezdil/mcp-gpu-server",
   "packages": [
     {
       "registryType": "pypi",
-      "identifier": "mcp-gpu-server",
-      "version": "0.2.0",
+      "identifier": "gpu-server",
+      "version": "0.2.1",
       "transport": {
         "type": "stdio"
       }

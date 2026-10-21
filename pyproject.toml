@@ -3,8 +3,8 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "mcp-gpu-server"
-version = "0.2.0"
+name = "gpu-server"
+version = "0.2.1"
 description = "MCP server for GPU monitoring: utilization, VRAM, temperature via nvidia-smi / NVML"
 readme = "README.md"
 requires-python = ">=3.10"
