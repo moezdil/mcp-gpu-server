@@ -34,3 +34,6 @@ Repository = "https://github.com/moezdil/mcp-gpu-server"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/mcp_gpu_server"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src", "tests", "README.md", "pyproject.toml"]
