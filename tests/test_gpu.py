@@ -123,7 +123,7 @@ except Exception as e:
 
 _section("CLI entrypoint")
 result = subprocess.run(
-    ["python3", "-c", "from mcp_gpu_server.server import main"],
+    [sys.executable, "-c", "from mcp_gpu_server.server import main"],
     capture_output=True, text=True,
 )
 _check(result.returncode == 0, "entrypoint importable")
