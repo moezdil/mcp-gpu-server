@@ -11,6 +11,7 @@ READ_ONLY = ToolAnnotations(read_only_hint=True, idempotent_hint=True, open_worl
 
 
 def _all_stats() -> dict[str, Any]:
+    """Read stats via NVML, fall back to nvidia-smi (no CUDA version there)."""
     try:
         import pynvml
         pynvml.nvmlInit()
