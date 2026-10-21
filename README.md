@@ -1,4 +1,4 @@
-mcp-name: io.github.mesutoezdil/mcp-gpu-server
+mcp-name: io.github.moezdil/mcp-gpu-server
 
 # mcp-gpu-server
 
@@ -60,8 +60,9 @@ Add this to your MCP client config file:
 
 ## Run tests
 
-    python tests/test_gpu.py
+    uv run pytest tests/test_server.py   # no GPU needed
+    uv run python tests/test_gpu.py      # on a GPU host
 
 ## Requirements
 
-Python 3.10 or higher. NVIDIA GPU with drivers installed on the host machine.
+Python 3.10 or higher, MCP Python SDK 2.x. NVIDIA GPU with drivers installed on the host machine.

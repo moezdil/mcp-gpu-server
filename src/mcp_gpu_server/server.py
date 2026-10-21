@@ -1,8 +1,13 @@
 import subprocess
 from typing import Any
-from mcp.server.fastmcp import FastMCP
+from mcp.server import CacheHint, MCPServer
+from mcp.types import ToolAnnotations
 
-mcp = FastMCP("mcp-gpu-server")
+mcp = MCPServer(
+    "mcp-gpu-server",
+    cache_hints={"tools/list": CacheHint(ttl_ms=86_400_000, scope="public")},
+)
+READ_ONLY = ToolAnnotations(read_only_hint=True, idempotent_hint=True, open_world_hint=False)
 
 
 def _all_stats() -> dict[str, Any]:
@@ -63,6 +68,7 @@ def _all_stats() -> dict[str, Any]:
             "index": int(idx),
             "name": name,
             "driver": drv,
+            "cuda": None,
             "compute_cap": cap,
             "temp_c": int(temp),
             "gpu_pct": int(gu),
@@ -77,7 +83,7 @@ def _all_stats() -> dict[str, Any]:
     return {"count": len(gpus), "gpus": gpus}
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def gpu_info() -> dict[str, Any]:
     """GPU name, driver version, and CUDA version for each device."""
     s = _all_stats()
@@ -86,7 +92,7 @@ def gpu_info() -> dict[str, Any]:
     ]}
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def gpu_utilization() -> dict[str, Any]:
     """GPU core and memory utilization percentage for each device."""
     s = _all_stats()
@@ -95,7 +101,7 @@ def gpu_utilization() -> dict[str, Any]:
     ]}
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def gpu_vram() -> dict[str, Any]:
     """VRAM total, used, free (MiB) and utilization % for each device."""
     s = _all_stats()
@@ -104,7 +110,7 @@ def gpu_vram() -> dict[str, Any]:
     ]}
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def gpu_temperature() -> dict[str, Any]:
     """Core temperature in °C for each device."""
     s = _all_stats()
@@ -113,7 +119,7 @@ def gpu_temperature() -> dict[str, Any]:
     ]}
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def gpu_stats() -> dict[str, Any]:
     """Full snapshot: info, VRAM, utilization, and temperature for every device."""
     return _all_stats()
