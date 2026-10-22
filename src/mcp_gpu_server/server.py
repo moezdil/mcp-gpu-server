@@ -86,7 +86,10 @@ def _all_stats() -> dict[str, Any]:
 
 @mcp.tool(annotations=READ_ONLY)
 def gpu_info() -> dict[str, Any]:
-    """GPU name, driver version, and CUDA version for each device."""
+    """GPU name, driver version, and highest CUDA version the driver supports, per device.
+
+    cuda is null when NVML is unavailable (nvidia-smi fallback).
+    """
     s = _all_stats()
     return {"count": s["count"], "gpus": [
         {k: g[k] for k in ("index", "name", "driver", "cuda")} for g in s["gpus"]
@@ -107,7 +110,10 @@ def gpu_utilization() -> dict[str, Any]:
 
 @mcp.tool(annotations=READ_ONLY)
 def gpu_vram() -> dict[str, Any]:
-    """VRAM total, used, free (MiB) and utilization % for each device."""
+    """VRAM total, used, free (MiB) and pct (used/total %) for each device.
+
+    Use this to check how full VRAM is or whether a model fits.
+    """
     s = _all_stats()
     return {"count": s["count"], "gpus": [
         {"index": g["index"]} | g["vram"] for g in s["gpus"]
@@ -125,7 +131,11 @@ def gpu_temperature() -> dict[str, Any]:
 
 @mcp.tool(annotations=READ_ONLY)
 def gpu_stats() -> dict[str, Any]:
-    """Full snapshot: info, VRAM, utilization, and temperature for every device."""
+    """Full snapshot: info, VRAM, utilization, and temperature for every device.
+
+    Prefer this over several single-metric calls. count is 0 and error is set when no
+    NVIDIA GPU is found.
+    """
     return _all_stats()
 
 
