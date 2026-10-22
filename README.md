@@ -11,7 +11,7 @@ An MCP server that exposes NVIDIA GPU metrics as tools. Once connected, any MCP-
 Instead of running nvidia-smi manually, you ask your AI assistant and it calls these tools automatically:
 
     gpu_info         GPU name, driver version, CUDA version
-    gpu_utilization  core utilization % and memory bandwidth %
+    gpu_utilization  core utilization % and memory controller busy %
     gpu_vram         total, used, free VRAM in MiB and usage %
     gpu_temperature  GPU core temperature in Celsius
     gpu_stats        everything above in one call
@@ -96,7 +96,7 @@ Install the published package and run the GPU integration test:
     git clone --depth 1 https://github.com/moezdil/mcp-gpu-server.git repo
     venv/bin/python repo/tests/test_gpu.py
 
-Result: all 37 checks passed, for both the NVML path and nvidia-smi.
+Result: all 37 checks passed. They exercise the NVML path; the nvidia-smi fallback is only checked for presence, not parsed.
 
 Then call every tool through a real MCP client over stdio:
 
