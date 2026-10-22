@@ -95,7 +95,10 @@ def gpu_info() -> dict[str, Any]:
 
 @mcp.tool(annotations=READ_ONLY)
 def gpu_utilization() -> dict[str, Any]:
-    """GPU core and memory utilization percentage for each device."""
+    """Busy % of the GPU cores (gpu_pct) and memory controller (mem_pct) for each device.
+
+    mem_pct is memory bandwidth activity, not how full VRAM is; use gpu_vram for that.
+    """
     s = _all_stats()
     return {"count": s["count"], "gpus": [
         {k: g[k] for k in ("index", "gpu_pct", "mem_pct")} for g in s["gpus"]
